@@ -7,14 +7,14 @@ import RollButton from "./components/RollButton";
 
 export default function App() {
   const [dice, setDice] = React.useState(createAllDice());
-  const [tenzies, setTenzies] = React.useState(false);
+  const [tenzi, setTenzi] = React.useState(false);
 
   React.useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
     const allSameValue = dice.every((die) => dice[0].value === die.value);
 
     if (allDiceHeld && allSameValue) {
-      setTenzies(true);
+      setTenzi(true);
     }
   }, [dice]);
 
@@ -52,7 +52,7 @@ export default function App() {
   }
 
   function newGame() {
-    setTenzies(false);
+    setTenzi(false);
     setDice(createAllDice());
   }
 
@@ -62,11 +62,11 @@ export default function App() {
 
   return (
     <main>
-      {tenzies && <Confetti numberOfPieces={300} />}
+      {tenzi && <Confetti numberOfPieces={300} />}
       <div className="game-container">
-        <Header playerWon={tenzies} />
+        <Header playerWon={tenzi} />
         <div className="dice-container">{diceElements}</div>
-        <RollButton buttonRole={tenzies ? newGame : rollDice} playerWon={tenzies} />
+        <RollButton buttonRole={tenzi ? newGame : rollDice} playerWon={tenzi} />
       </div>
     </main>
   );

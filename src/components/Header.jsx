@@ -3,7 +3,7 @@ import React from "react";
 export default function Header(props) {
   return (
     <header>
-      <h1 className="title">Tenzies</h1>
+      <h1 className="title">Tenzi</h1>
       {!props.playerWon && (
         <p className="summary-text">
           Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
