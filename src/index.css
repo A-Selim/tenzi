@@ -8,6 +8,7 @@ body {
 }
 
 h1,
+h2,
 p {
   margin: 0;
 }
@@ -41,7 +42,7 @@ header {
 }
 
 .title {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #2b283a;
   margin-bottom: 0.5em;
@@ -55,6 +56,12 @@ header {
   text-align: center;
 }
 
+.win-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4a4e74;
+  margin-top: 2em;
+}
 /* Dice container */
 .dice-container {
   width: 80%;
@@ -81,6 +88,7 @@ header {
   font-size: 1.5rem;
   font-weight: 700;
   color: #2b283a;
+  user-select: none;
 }
 
 /* Roll button */
@@ -99,4 +107,8 @@ header {
 
 .btn:active {
   transform: scale(0.95);
+}
+
+.held {
+  background-color: #59e391;
 }

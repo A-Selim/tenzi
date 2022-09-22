@@ -1,11 +1,22 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 import Header from "./components/Header";
 import Die from "./components/Die";
 import RollButton from "./components/RollButton";
 
 export default function App() {
   const [dice, setDice] = React.useState(createAllDice());
+  const [tenzies, setTenzies] = React.useState(false);
+
+  React.useEffect(() => {
+    const allDiceHeld = dice.every((die) => die.isHeld);
+    const allSameValue = dice.every((die) => dice[0].value === die.value);
+
+    if (allDiceHeld && allSameValue) {
+      setTenzies(true);
+    }
+  }, [dice]);
 
   function createAllDice() {
     const diceArr = [];
@@ -25,17 +36,37 @@ export default function App() {
   }
 
   function rollDice() {
+    setDice((oldDice) =>
+      oldDice.map((die) => {
+        return die.isHeld ? die : { ...die, value: getRandomNumber() };
+      })
+    );
+  }
+
+  function holdDie(id) {
+    setDice((oldDice) =>
+      oldDice.map((die) => {
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
+      })
+    );
+  }
+
+  function newGame() {
+    setTenzies(false);
     setDice(createAllDice());
   }
 
-  const diceElements = dice.map((die) => <Die key={die.id} value={die.value} isHeld={die.isHeld} />);
+  const diceElements = dice.map((die) => (
+    <Die key={die.id} value={die.value} isHeld={die.isHeld} hold={() => holdDie(die.id)} />
+  ));
 
   return (
     <main>
+      {tenzies && <Confetti numberOfPieces={300} />}
       <div className="game-container">
-        <Header />
+        <Header playerWon={tenzies} />
         <div className="dice-container">{diceElements}</div>
-        <RollButton roll={rollDice} />
+        <RollButton buttonRole={tenzies ? newGame : rollDice} playerWon={tenzies} />
       </div>
     </main>
   );
