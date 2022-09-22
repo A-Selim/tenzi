@@ -67,8 +67,8 @@ header {
   width: 80%;
   margin: 0 auto;
   display: grid;
-  grid-template: auto / repeat(5, 1fr);
-  gap: 20px;
+  grid-template: auto / repeat(2, 1fr);
+  gap: 40px 20px;
   place-items: center;
 }
 
@@ -111,4 +111,10 @@ header {
 
 .held {
   background-color: #59e391;
+}
+
+@media (min-width: 768px) {
+  .dice-container {
+    grid-template: auto / repeat(5, 1fr);
+  }
 }
