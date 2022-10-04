@@ -13,3 +13,4 @@ Tenzi is the world's fastest dice game! Fast, fun, and engaging.
 ## Built with
 
 - ReactJS
+- CSS
